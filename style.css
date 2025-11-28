@@ -1,130 +1,83 @@
-/* Reset et base */
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    background-color: #f0f2f5; /* Gris clair fond global */
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* Pas de scroll global */
+    background-color: #050505; color: white; font-family: 'Orbitron', sans-serif;
+    height: 100vh; display: flex; flex-direction: column; overflow: hidden;
 }
 
-/* HEADER */
+:root {
+    --neon-blue: #00f3ff; --neon-red: #ff0055; --neon-orange: #ffaa00; --bg-panel: rgba(20, 20, 20, 0.8);
+}
+
+.neon-text-blue { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+.neon-text-orange { color: var(--neon-orange); text-shadow: 0 0 10px var(--neon-orange); }
+
 header {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;
+    background: #111; border-bottom: 1px solid #333; height: 60px;
 }
+h1 { font-size: 20px; letter-spacing: 2px; }
+.version { font-size: 10px; color: var(--neon-blue); vertical-align: super; }
 
-.header-right button {
-    margin-left: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
+.wallet-box { color: var(--neon-orange); border: 1px solid var(--neon-orange); padding: 5px 10px; border-radius: 4px; }
+
+/* LAYOUT PRINCIPAL */
+.main-container { display: flex; flex: 1; padding: 10px; gap: 15px; height: calc(100vh - 60px); }
+
+/* COLONNE GAUCHE */
+.left-panel {
+    width: 250px; display: flex; flex-direction: column; gap: 15px;
 }
-
-#btn-shop { background-color: #ff9800; color: white; }
-#btn-speedrun { background-color: #e91e63; color: white; } /* Rose pour speedrun */
-#btn-settings { background-color: #607d8b; color: white; }
-
-/* MAIN LAYOUT */
-.main-container {
-    display: flex;
-    flex: 1;
-    padding: 10px;
-    gap: 10px;
+.stat-panel {
+    flex: 1; background: var(--bg-panel); border: 1px solid #333; padding: 10px; overflow-y: auto; border-radius: 5px;
 }
+.blue-panel { border-top: 2px solid var(--neon-blue); }
+.red-panel { border-top: 2px solid var(--neon-red); }
 
-/* LEADERBOARD (Gauche) */
-.leaderboard-panel {
-    width: 250px;
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    overflow-y: auto;
-}
+h3 { font-size: 11px; margin-bottom: 5px; border-bottom: 1px solid #333; padding-bottom: 5px; text-align: center; }
+ul { list-style: none; font-size: 12px; }
+li { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #111; }
 
-.leaderboard-panel h3 {
-    font-size: 14px;
-    text-transform: uppercase;
-    color: #555;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 5px;
-}
+.mini-stats { background: #111; padding: 10px; border: 1px solid #444; font-size: 12px; color: #888; text-align: center; }
 
-.leaderboard-panel ul { list-style: none; }
-.leaderboard-panel li {
-    padding: 5px 0;
-    font-size: 14px;
-    border-bottom: 1px solid #f9f9f9;
+/* ZONE JEU */
+.game-section { flex: 1; display: flex; flex-direction: column; align-items: center; }
+.canvas-wrapper {
+    position: relative; border: 2px solid #333; background: #000;
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
 }
+canvas { display: block; max-width: 100%; max-height: 80vh; }
 
-/* ZONE DE JEU (Centre) */
-.game-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    position: relative;
-}
+.game-footer { width: 100%; display: flex; justify-content: space-between; margin-top: 5px; color: #666; font-size: 12px; }
 
-canvas {
-    background-color: #87CEEB; /* Bleu ciel par défaut */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    border: 4px solid #333;
-    max-width: 100%;
-    max-height: 80vh;
+/* MODALS & BOUTONS */
+.overlay, .modal-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 100;
+    display: none; align-items: center; justify-content: center;
 }
+.overlay.active, .modal-overlay.active { display: flex; }
 
-#game-overlay {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 30px;
-    text-align: center;
-    border-radius: 10px;
-    display: none; /* Caché par défaut */
+.modal {
+    background: #0a0a0a; border: 1px solid var(--neon-blue); padding: 30px;
+    text-align: center; box-shadow: 0 0 20px rgba(0, 243, 255, 0.2); min-width: 300px; position: relative;
 }
+.close-modal { position: absolute; top: 5px; right: 10px; cursor: pointer; color: white; font-size: 20px; }
 
-.level-controls {
-    margin-top: 10px;
-    display: flex;
-    gap: 15px;
-    align-items: center;
+.neon-btn {
+    background: transparent; border: 1px solid var(--neon-blue); color: var(--neon-blue);
+    padding: 8px 15px; cursor: pointer; margin-top: 10px; font-family: 'Orbitron';
 }
+.neon-btn:hover { background: var(--neon-blue); color: black; }
+.red-btn { border-color: var(--neon-red); color: var(--neon-red); }
+.red-btn:hover { background: var(--neon-red); color: white; }
+.orange-btn { border-color: var(--neon-orange); color: var(--neon-orange); }
+.orange-btn:hover { background: var(--neon-orange); color: black; }
+.icon-btn { background: none; border: none; font-size: 18px; cursor: pointer; }
 
-/* FOOTER DÉFILANT */
-footer {
-    height: 30px;
-    background: #222;
-    color: #0f0; /* Vert style terminal */
-    overflow: hidden;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
+input[type="text"] {
+    background: #111; border: 1px solid var(--neon-blue); color: white; padding: 8px; width: 100%; text-align: center; font-family: 'Orbitron';
 }
-
-.scrolling-text {
-    animation: defilement 15s linear infinite;
-    padding-left: 100%;
-    font-family: 'Courier New', monospace;
-}
-
-@keyframes defilement {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
+.shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+.shop-item { border: 1px solid #333; padding: 5px; cursor: pointer; font-size: 10px; }
+.shop-item:hover { border-color: white; }
+.color-preview { width: 30px; height: 30px; margin: 0 auto 5px; }
