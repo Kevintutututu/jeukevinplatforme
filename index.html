@@ -3,68 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeu Plateforme Kevin</title>
+    <title>JEU KEVIN ULTIMATE</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <script type="module" src="game.js"></script>
 </head>
 <body>
 
     <header>
         <div class="header-left">
-            <span id="player-name-display">Joueur: Invité</span>
-            <span id="player-level-display">Niv Joueur: 1</span>
+            <button id="btn-settings" class="icon-btn">⚙️</button>
+            <div class="wallet-box"><span id="coin-display">0</span> KC</div>
         </div>
-        
         <div class="header-center">
-            <h1>Jeu Plateforme Kevin</h1>
-            <div id="level-indicator">Niveau 1</div>
+            <h1>JEU KEVIN <span class="version">FINAL</span></h1>
         </div>
-
         <div class="header-right">
-            <button id="btn-shop">Boutique 🛒 (<span id="coin-display">0</span> KC)</button>
-            <button id="btn-speedrun" class="special-btn">Mini-Jeu Speedrun ⚡</button>
-            <button id="btn-settings">⚙️</button>
+            <div class="stat-box">NIV: <span id="player-level-display" class="highlight">1</span></div>
+            <button id="btn-speedrun" class="neon-btn red-btn">⚡ SPEEDRUN</button>
         </div>
     </header>
 
     <div class="main-container">
         
-        <aside class="leaderboard-panel">
-            <h3>Classement (Niv Max)</h3>
-            <ul id="leaderboard-list">
-                <li>Chargement...</li>
-                </ul>
-            
-            <hr>
-            
-            <h3>Morts Totales ☠️</h3>
-            <ul id="death-leaderboard-list">
-                <li>Chargement...</li>
-            </ul>
+        <aside class="left-panel">
+            <div class="stat-panel blue-panel">
+                <h3 id="title-rank-1">CLASSEMENT (NIV MAX)</h3>
+                <ul id="list-rank-1">Chargement...</ul>
+            </div>
+
+            <div class="stat-panel red-panel">
+                <h3 id="title-rank-2">NOMBRE DE MORTS</h3>
+                <ul id="list-rank-2">Chargement...</ul>
+            </div>
+
+            <div class="mini-stats">
+                <p id="info-perso-1">Kevin: 12 Niv</p>
+                <p id="info-perso-2">Morts: 76</p>
+            </div>
         </aside>
 
-        <main class="game-area">
-            <canvas id="gameCanvas" width="800" height="600"></canvas>
-            
-            <div id="game-overlay">
-                <h2>Prêt ?</h2>
-                <p>Utilise les FLÈCHES pour bouger.</p>
-                <button id="btn-start">JOUER</button>
+        <main class="game-section">
+            <div class="canvas-wrapper">
+                <canvas id="gameCanvas" width="900" height="600"></canvas>
+                
+                <div id="login-overlay" class="overlay active">
+                    <div class="modal">
+                        <h2 class="neon-text-blue">IDENTIFICATION</h2>
+                        <input type="text" id="username-input" placeholder="Ton Pseudo..." maxlength="12">
+                        <button id="btn-login" class="neon-btn">VALIDER</button>
+                    </div>
+                </div>
+
+                <div id="game-overlay" class="overlay">
+                    <h2 id="menu-title">PRÊT ?</h2>
+                    <p id="menu-desc">Atteins le bloc VERT.</p>
+                    <button id="btn-start" class="neon-btn">JOUER</button>
+                    <br><br>
+                    <button id="btn-shop" class="neon-btn orange-btn">BOUTIQUE 🛒</button>
+                </div>
             </div>
-            
-            <div class="level-controls">
-                <button id="btn-restart-level">🔄 Recommencer (Start)</button>
-                <label>Aller au niveau : <input type="number" id="level-select-input" min="1" max="1000" value="1"></label>
+
+            <div class="game-footer">
+                <span>Niveau actuel : <span id="current-level-num">1</span></span>
+                <span id="speedrun-timer" style="display:none; color:red">0.00 s</span>
             </div>
         </main>
-
     </div>
 
-    <footer>
-        <div class="scrolling-text">
-            Jeu proposé par Kevin Couëdro • Bienvenue sur le jeu de plateforme ultime • 1000 Niveaux à battre !
+    <div id="shop-modal" class="modal-overlay">
+        <div class="modal shop-modal-content">
+            <span class="close-modal" id="close-shop">&times;</span>
+            <h2 class="neon-text-orange">BOUTIQUE</h2>
+            <p>Solde : <span id="shop-coin-display">0</span> KC</p>
+            <div class="shop-grid" id="shop-items"></div>
         </div>
-    </footer>
+    </div>
+
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal">
+            <span class="close-modal" id="close-settings">&times;</span>
+            <h2>PARAMÈTRES</h2>
+            <button id="btn-download-db" class="neon-btn">📥 TÉLÉCHARGER DATA</button>
+        </div>
+    </div>
 
 </body>
 </html>
