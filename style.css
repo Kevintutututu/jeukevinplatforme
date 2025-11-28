@@ -5,7 +5,8 @@ body {
 }
 
 :root {
-    --neon-blue: #00f3ff; --neon-red: #ff0055; --neon-orange: #ffaa00; --bg-panel: rgba(20, 20, 20, 0.8);
+    --neon-blue: #00f3ff; --neon-red: #ff0055; --neon-orange: #ffaa00; --neon-green: #00ff66;
+    --bg-panel: rgba(20, 20, 20, 0.9);
 }
 
 .neon-text-blue { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
@@ -13,71 +14,99 @@ body {
 
 header {
     display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;
-    background: #111; border-bottom: 1px solid #333; height: 60px;
+    background: #0a0a0a; border-bottom: 2px solid #222; height: 60px;
 }
-h1 { font-size: 20px; letter-spacing: 2px; }
+h1 { font-size: 22px; letter-spacing: 2px; text-transform: uppercase; }
 .version { font-size: 10px; color: var(--neon-blue); vertical-align: super; }
 
-.wallet-box { color: var(--neon-orange); border: 1px solid var(--neon-orange); padding: 5px 10px; border-radius: 4px; }
+.wallet-box { border: 1px solid var(--neon-orange); color: var(--neon-orange); padding: 5px 15px; border-radius: 4px; font-weight: bold; }
 
-/* LAYOUT PRINCIPAL */
-.main-container { display: flex; flex: 1; padding: 10px; gap: 15px; height: calc(100vh - 60px); }
+/* LAYOUT */
+.main-container { display: flex; flex: 1; padding: 20px; gap: 20px; height: calc(100vh - 60px); justify-content: center; }
 
-/* COLONNE GAUCHE */
+/* GAUCHE */
 .left-panel {
-    width: 250px; display: flex; flex-direction: column; gap: 15px;
+    width: 260px; display: flex; flex-direction: column; gap: 10px;
 }
 .stat-panel {
     flex: 1; background: var(--bg-panel); border: 1px solid #333; padding: 10px; overflow-y: auto; border-radius: 5px;
 }
-.blue-panel { border-top: 2px solid var(--neon-blue); }
-.red-panel { border-top: 2px solid var(--neon-red); }
+.blue-panel { border-top: 3px solid var(--neon-blue); }
+.red-panel { border-top: 3px solid var(--neon-red); }
 
-h3 { font-size: 11px; margin-bottom: 5px; border-bottom: 1px solid #333; padding-bottom: 5px; text-align: center; }
-ul { list-style: none; font-size: 12px; }
-li { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #111; }
+h3 { font-size: 12px; margin-bottom: 8px; border-bottom: 1px solid #333; padding-bottom: 5px; text-align: center; color: #aaa; }
+ul { list-style: none; font-size: 13px; }
+li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #111; }
 
-.mini-stats { background: #111; padding: 10px; border: 1px solid #444; font-size: 12px; color: #888; text-align: center; }
-
-/* ZONE JEU */
-.game-section { flex: 1; display: flex; flex-direction: column; align-items: center; }
-.canvas-wrapper {
-    position: relative; border: 2px solid #333; background: #000;
-    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+.mini-stats {
+    background: #111; padding: 15px; border: 1px solid #444; border-radius: 5px;
+    font-size: 14px; text-align: center; color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-canvas { display: block; max-width: 100%; max-height: 80vh; }
 
-.game-footer { width: 100%; display: flex; justify-content: space-between; margin-top: 5px; color: #666; font-size: 12px; }
+/* CENTRE (JEU) */
+.game-section { display: flex; flex-direction: column; width: 900px; } /* Largeur fixe pour alignement */
 
-/* MODALS & BOUTONS */
+.canvas-wrapper {
+    position: relative; border: 4px solid #222; background: #000;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    width: 900px; height: 600px;
+}
+canvas { display: block; width: 100%; height: 100%; }
+
+/* UI SOUS LE JEU */
+.game-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #111; border: 1px solid #333; border-top: none;
+    padding: 10px 15px; width: 100%;
+}
+.footer-left { display: flex; gap: 15px; align-items: center; }
+.level-input-box { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #888; }
+.level-input-box input { width: 50px; padding: 5px; background: #000; border: 1px solid #444; color: white; text-align: center; }
+
+.small-btn {
+    background: #222; border: 1px solid #444; color: white; padding: 5px 10px; cursor: pointer; font-family: 'Orbitron'; font-size: 10px;
+}
+.small-btn:hover { background: #333; border-color: white; }
+
+.footer-center { font-size: 16px; letter-spacing: 1px; }
+.timer-display { font-size: 20px; color: var(--neon-red); font-weight: bold; }
+
+/* MODALS */
 .overlay, .modal-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); z-index: 100;
+    background: rgba(0,0,0,0.95); z-index: 100;
     display: none; align-items: center; justify-content: center;
 }
 .overlay.active, .modal-overlay.active { display: flex; }
 
 .modal {
-    background: #0a0a0a; border: 1px solid var(--neon-blue); padding: 30px;
-    text-align: center; box-shadow: 0 0 20px rgba(0, 243, 255, 0.2); min-width: 300px; position: relative;
+    background: #0a0a0a; border: 1px solid var(--neon-blue); padding: 40px;
+    text-align: center; box-shadow: 0 0 40px rgba(0, 243, 255, 0.15); min-width: 350px; position: relative;
 }
-.close-modal { position: absolute; top: 5px; right: 10px; cursor: pointer; color: white; font-size: 20px; }
+.close-modal { position: absolute; top: 10px; right: 15px; cursor: pointer; color: white; font-size: 24px; }
 
 .neon-btn {
-    background: transparent; border: 1px solid var(--neon-blue); color: var(--neon-blue);
-    padding: 8px 15px; cursor: pointer; margin-top: 10px; font-family: 'Orbitron';
+    background: transparent; border: 2px solid var(--neon-blue); color: var(--neon-blue);
+    padding: 12px 25px; cursor: pointer; margin-top: 20px; font-family: 'Orbitron'; font-weight: bold; font-size: 14px;
+    transition: 0.2s;
 }
-.neon-btn:hover { background: var(--neon-blue); color: black; }
+.neon-btn:hover { background: var(--neon-blue); color: black; box-shadow: 0 0 15px var(--neon-blue); }
+
 .red-btn { border-color: var(--neon-red); color: var(--neon-red); }
-.red-btn:hover { background: var(--neon-red); color: white; }
+.red-btn:hover { background: var(--neon-red); color: white; box-shadow: 0 0 15px var(--neon-red); }
+
 .orange-btn { border-color: var(--neon-orange); color: var(--neon-orange); }
-.orange-btn:hover { background: var(--neon-orange); color: black; }
-.icon-btn { background: none; border: none; font-size: 18px; cursor: pointer; }
+.orange-btn:hover { background: var(--neon-orange); color: black; box-shadow: 0 0 15px var(--neon-orange); }
+
+.icon-btn { background: none; border: 1px solid #333; padding: 5px; cursor: pointer; color: #888; }
+.icon-btn:hover { color: white; border-color: white; }
 
 input[type="text"] {
-    background: #111; border: 1px solid var(--neon-blue); color: white; padding: 8px; width: 100%; text-align: center; font-family: 'Orbitron';
+    background: #000; border: 1px solid var(--neon-blue); color: white; padding: 15px; width: 100%;
+    text-align: center; font-family: 'Orbitron'; font-size: 18px; text-transform: uppercase;
 }
-.shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
-.shop-item { border: 1px solid #333; padding: 5px; cursor: pointer; font-size: 10px; }
+.shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+.shop-item { border: 1px solid #333; padding: 10px; cursor: pointer; font-size: 11px; background: #111; }
 .shop-item:hover { border-color: white; }
-.color-preview { width: 30px; height: 30px; margin: 0 auto 5px; }
+.color-preview { width: 40px; height: 40px; margin: 0 auto 10px; border: 1px solid #333; }
