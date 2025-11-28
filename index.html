@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JEU KEVIN ULTIMATE</title>
+    <title>JEU KEVIN FINAL</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <script type="module" src="game.js"></script>
@@ -19,7 +19,7 @@
             <h1>JEU KEVIN <span class="version">FINAL</span></h1>
         </div>
         <div class="header-right">
-            <div class="stat-box">NIV: <span id="player-level-display" class="highlight">1</span></div>
+            <div class="stat-box">NIV JOUEUR: <span id="player-level-display" class="highlight">1</span></div>
             <button id="btn-speedrun" class="neon-btn red-btn">⚡ SPEEDRUN</button>
         </div>
     </header>
@@ -38,26 +38,29 @@
             </div>
 
             <div class="mini-stats">
-                <p id="info-perso-1">Kevin: 12 Niv</p>
-                <p id="info-perso-2">Morts: 76</p>
+                <p id="info-perso-name">JOUEUR</p>
+                <hr style="border-color:#333; margin:5px 0">
+                <p id="info-perso-1">Niv: --</p>
+                <p id="info-perso-2">Morts: --</p>
             </div>
         </aside>
 
         <main class="game-section">
+            
             <div class="canvas-wrapper">
                 <canvas id="gameCanvas" width="900" height="600"></canvas>
                 
                 <div id="login-overlay" class="overlay active">
                     <div class="modal">
                         <h2 class="neon-text-blue">IDENTIFICATION</h2>
-                        <input type="text" id="username-input" placeholder="Ton Pseudo..." maxlength="12">
+                        <input type="text" id="username-input" placeholder="TON PSEUDO" maxlength="12" style="text-transform:uppercase">
                         <button id="btn-login" class="neon-btn">VALIDER</button>
                     </div>
                 </div>
 
                 <div id="game-overlay" class="overlay">
                     <h2 id="menu-title">PRÊT ?</h2>
-                    <p id="menu-desc">Atteins le bloc VERT.</p>
+                    <p>Atteins le bloc VERT.</p>
                     <button id="btn-start" class="neon-btn">JOUER</button>
                     <br><br>
                     <button id="btn-shop" class="neon-btn orange-btn">BOUTIQUE 🛒</button>
@@ -65,9 +68,24 @@
             </div>
 
             <div class="game-footer">
-                <span>Niveau actuel : <span id="current-level-num">1</span></span>
-                <span id="speedrun-timer" style="display:none; color:red">0.00 s</span>
+                <div class="footer-left">
+                    <button id="btn-restart" class="small-btn">🔄 RECOMMENCER</button>
+                    <div class="level-input-box">
+                        <span>Aller au niv :</span>
+                        <input type="number" id="level-select" min="1" value="1">
+                        <button id="btn-go" class="small-btn">GO</button>
+                    </div>
+                </div>
+                
+                <div class="footer-center">
+                    <span id="level-title">NIVEAU ACTUEL : <span id="current-level-num" class="neon-text-blue">1</span></span>
+                </div>
+
+                <div class="footer-right">
+                    <span id="speedrun-timer" class="timer-display" style="display:none">0.00 s</span>
+                </div>
             </div>
+
         </main>
     </div>
 
