@@ -1,0 +1,130 @@
+/* Reset et base */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+body {
+    background-color: #f0f2f5; /* Gris clair fond global */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Pas de scroll global */
+}
+
+/* HEADER */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.header-right button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+#btn-shop { background-color: #ff9800; color: white; }
+#btn-speedrun { background-color: #e91e63; color: white; } /* Rose pour speedrun */
+#btn-settings { background-color: #607d8b; color: white; }
+
+/* MAIN LAYOUT */
+.main-container {
+    display: flex;
+    flex: 1;
+    padding: 10px;
+    gap: 10px;
+}
+
+/* LEADERBOARD (Gauche) */
+.leaderboard-panel {
+    width: 250px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+.leaderboard-panel h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+.leaderboard-panel ul { list-style: none; }
+.leaderboard-panel li {
+    padding: 5px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+/* ZONE DE JEU (Centre) */
+.game-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    position: relative;
+}
+
+canvas {
+    background-color: #87CEEB; /* Bleu ciel par défaut */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border: 4px solid #333;
+    max-width: 100%;
+    max-height: 80vh;
+}
+
+#game-overlay {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    display: none; /* Caché par défaut */
+}
+
+.level-controls {
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* FOOTER DÉFILANT */
+footer {
+    height: 30px;
+    background: #222;
+    color: #0f0; /* Vert style terminal */
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.scrolling-text {
+    animation: defilement 15s linear infinite;
+    padding-left: 100%;
+    font-family: 'Courier New', monospace;
+}
+
+@keyframes defilement {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
